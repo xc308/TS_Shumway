@@ -54,18 +54,26 @@ plot.ts(v, ylim = c(-3, 3), main = "moving average")
 ## Expl 1.10 Autoregressions
 #----------------------------
 
+par(mfrow = c(1, 1), mai = c(0.5, 0.4, 0.5, 0.05))
 w <- rnorm(550, 0, 1) # 50 extra to avoid startup problem
 x <- filter(w, filter = c(1, -.9), method = "recursive")[-(1:50)]
 plot.ts(x, main = "autoregressive")
 
 
 
+## Expl 1.11 Random walk with drift Model
+#-----------------------------------------
 
+# 200 obs generated from the model with delta = 0,
+# and delta = .2, with sigma_w = 1
 
+set.seed(28-11-2021)
+w <- rnorm(200); x <- cumsum(w)
+w_dft <-  w + .2; x_dft <- cumsum(w_dft)
 
-
-
-
-
-
+range(x_dft) #[1] -3.449574 53.321570
+plot.ts(x_dft, ylim = c(-5, 55), main = "Random walk / (with drift)")
+lines(x, col = 2)
+abline(a = 0, b = 0.2, lty = 4) # straigth line for comparison
+abline(h = 0, col = 4, lty = 2) 
 
