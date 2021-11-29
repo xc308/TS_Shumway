@@ -91,9 +91,9 @@ pt_cs <- plot.ts(cs, main = expression(2 * cos(2 * pi * t / 50 + 0.6 * pi)))
 pt_cs1 <- plot.ts(cs + w, main = expression(2 * cos(2 * pi * t / 50 + 0.6 * pi) + N(0, 1)))
 pt_cs5 <- plot.ts(cs + 5 * w, main = expression(2 * cos(2 * pi * t / 50 + 0.6 * pi) + N(0, 5^2)))
 
-save(pt_cs, file = "Fig/plt_cs.jpg")
-save(pt_cs1, file = "Fig/plt_cs1.jpg")
-save(pt_cs5, file = "Fig/plt_cs5.jpg")
+save(pt_cs, file = "Fig/Chp1_plt_cs.jpg")
+save(pt_cs1, file = "Fig/Chp1_plt_cs1.jpg")
+save(pt_cs5, file = "Fig/Chp1_plt_cs5.jpg")
 
 
 
