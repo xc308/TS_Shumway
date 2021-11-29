@@ -77,3 +77,28 @@ lines(x, col = 2)
 abline(a = 0, b = 0.2, lty = 4) # straigth line for comparison
 abline(h = 0, col = 4, lty = 2) 
 
+
+
+## Expl 1.12 Signal in noise
+#----------------------------
+
+t <- 1:500
+cs <- 2 * cos(2 * pi * 1/50 * t + 0.6 * pi)
+w <- rnorm(500, 0, 1)
+
+par(mfrow = c(3, 1), cex.main = 1.5, mar = c(3, 2, 2, 1))
+pt_cs <- plot.ts(cs, main = expression(2 * cos(2 * pi * t / 50 + 0.6 * pi)))
+pt_cs1 <- plot.ts(cs + w, main = expression(2 * cos(2 * pi * t / 50 + 0.6 * pi) + N(0, 1)))
+pt_cs5 <- plot.ts(cs + 5 * w, main = expression(2 * cos(2 * pi * t / 50 + 0.6 * pi) + N(0, 5^2)))
+
+save(pt_cs, file = "Fig/plt_cs.jpg")
+save(pt_cs1, file = "Fig/plt_cs1.jpg")
+save(pt_cs5, file = "Fig/plt_cs5.jpg")
+
+
+
+
+
+
+
+
