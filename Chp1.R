@@ -67,6 +67,7 @@ plot.ts(x, main = "autoregressive")
 # 200 obs generated from the model with delta = 0,
 # and delta = .2, with sigma_w = 1
 
+par(mfrow = c(1, 1))
 set.seed(28-11-2021)
 w <- rnorm(200); x <- cumsum(w)
 w_dft <-  w + .2; x_dft <- cumsum(w_dft)
