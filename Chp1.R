@@ -187,6 +187,7 @@ acf(rec, lag.max = 48, main = "Recruitment")
 ccf(soi, rec, lag.max = 48, main = "SOI vs Rec", ylab = "CCF")
 
 
+
 ## Expl 1.29 Prewhittening and Cross Correlation analysis
 set.seed(3-12-2021)
 num = 120; t = 1:num
@@ -204,10 +205,10 @@ plot.ts(Yw)
 
 
 par(mfrow = c(3, 2), mgp = c(1.6, .6, 0), mar = c(3, 3, 1, 1))
-plot(X)
-plot(Y)
-acf(X, lag.max = 48, ylab = "ACF(X)")
-acf(Y, lag.max = 48, ylab = "ACF(Y)")
+plot(X, type = "o") # 12 obs per unit time; total 10 units time
+plot(Y, type = "o")
+acf(X, lag.max = 48, ylab = "ACF(X)") # 12 obs per unit time, 48 lags = 4 units time
+acf(Y, lag.max = 48, ylab = "ACF(Y)") 
 ccf(X, Y, 24, ylab = "CCF(X, Y)")
 ccf(X, Yw, 24, ylab = "CCF(X, Yw)", ylim = c(-.5, .5))
 range(ccf(X, Yw, 24)) # [1] -0.1390269  0.1516451
@@ -219,12 +220,23 @@ range(ccf(X, Yw, 24)) # [1] -0.1390269  0.1516451
 ## bottom right: X and Yw show uncorrelated
 
 
+par(mfrow = c(3, 2), mgp = c(2, .5, 0), mar = c(3, 3, 1, 1))
+# mpg:
+  # represents the location the labels (i.e. xlab and ylab in plot)
+  # second the location of the tick-mark labels
+  # third the location of tick marks x/y - axis
 
 
 
 
+## Expl 1.30 Soil Surface Temp
+par(mfrow = c(1, 1))
+persp(1:64, 1:36, soiltemp, phi = 25, theta = 25,
+      scale = F, expand = 4, ticktype = "detailed",
+      xlab = "rows", ylab = "cols", zlab = "Temp")
 
-
+plot.ts(rowMeans(soiltemp), xlab = "row",
+        ylab = "Average Temp by across cols for each row")
 
 
 
