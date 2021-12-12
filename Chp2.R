@@ -144,11 +144,50 @@ lines(fitted(fit), col = 2)
 
 
 
+## Expl 2.11 Moving Average Smoother
+# smoothing weights a0 = a+-1 =...= a+-5 = 1/12,
+# a+-6 = 1/ 24
+
+# reoves (filter out) obvious anual temp cycle
+# uncovers the EL Nino cycle
+
+wghts = c(.5, rep(1, 11), .5) / 12  # boxcar-type weights
+
+soi_f <- filter(soi, sides = 2, filter = wghts)
+
+plot(soi)
+lines(soi_f, lwd = 2, col = 4)
+
+par(fig = c(.65, 1, .65, 1), new = TRUE)
+nwgts = c(rep(0, 20), wghts, rep(0, 20))
+plot(nwgts, type = "l", ylim = c(-.02, .1), 
+     xaxt = "n", yaxt = "n", ann = F)
 
 
+## But the boxcar-type is too choppy
+# can obtain a smoother fit using normal distr for the weigths
+## Expl 2.12 Kernel Smoothing
+par(mfrow = c(2, 1))
+plot(soi)
 
+lines(ksmooth(x = time(soi), soi, kernel = "normal", bandwidth = 1), lwd = 2, col = 4)
 
+ksm <- ksmooth(time(soi), soi, "normal", bandwidth = 1)
+str(ksm)
+# List of 2
+#$ x: num [1:453] 1950 1950 1950 1950 1950 ...
+#$ y: num [1:453] 0.205 0.194 0.183 0.172 0.162 ...
 
+par(fig = c(.65, 1, .65, 1), new = T) # insert
+gauss <- function(x) {
+  1 / sqrt(2 * pi) * exp(- (x^2) / 2)
+}
+
+x <- seq(-3, 3, by = 0.001)
+plot(x, gauss(x), type = "l", ylim = c(-.02, 0.45),
+     xaxt = "n", yaxt = "n", ann = F)
+
+range(gauss(x)) # [1] 0.004431848 0.398942280
 
 
 
