@@ -190,7 +190,28 @@ plot(x, gauss(x), type = "l", ylim = c(-.02, 0.45),
 range(gauss(x)) # [1] 0.004431848 0.398942280
 
 
+## Expl 2.13 Lowess: locally weighted smoothers
+par(mfrow = c(1, 1))
+plot(soi)
+lws <- lowess(soi, f = .05)
+str(lws)
+# List of 2
+#$ x: num [1:453] 1950 1950 1950 1950 1950 ...
+#$ y: num [1:453]
 
+
+lines(lowess(soi, f = .05), lwd = 2, col = 4) # 5% of data to get estimate
+lines(lowess(soi, f = 2/3), lwd = 2, col = 2) # defalut fraction of data
+
+
+
+## Expl 2.14 smoothing splines
+plot(soi)
+lines(smooth.spline(time(soi), soi, spar = .5), lwd = 2, col = 4)
+# lambda small, emphasize El Nino cycle
+
+lines(smooth.spline(time(soi), soi, spar = 1), lwd = 2, col = 2)
+# lambda large, emphasize trend
 
 
 
