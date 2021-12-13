@@ -214,18 +214,49 @@ lines(smooth.spline(time(soi), soi, spar = 1), lwd = 2, col = 2)
 # lambda large, emphasize trend
 
 
+## Expl 2.15 Smoothing ONe series as a fun of another
+plot(tempr, cmort, xlab = "Temp", ylab = "Mort")
+
+lines(lowess(tempr, cmort), col = 2, lwd = 2)
 
 
 
 
+## Problem: Structral Model
+time(jj) # in quaters
+trend <- time(jj) - 1970  # center time
+cycle(jj)
+
+# > cycle(jj)
+#     Qtr1 Qtr2 Qtr3 Qtr4
+#1960    1    2    3    4
+#1961    1    2    3    4
+#1962    1    2    3    4
+str(cycle(jj)) # Time-Series [1:84]
+
+Q <- factor(cycle(jj)) # factor quarter
+
+reg <- lm(log(jj) ~ 0 + trend + Q, na.action = NULL) # no intercept
+
+reg$model
+model.matrix(reg)  # view model design matrix
+#reg$coefficients
+
+summary(reg)
+str(reg$fitted.values) # Time-Series [1:84]
 
 
+# include an intercept in the model
+reg2 <- lm(log(jj) ~ trend + Q, na.action = NULL)
+model.matrix(reg2)
 
-
-
-
-
-
+# graph data
+plot(jj)
+lines(reg$fitted.values, col = 2)
+plot(reg$residuals)
+# see annual trend in the residuals
+# not white
+# the model fits badly
 
 
 
