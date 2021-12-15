@@ -259,6 +259,28 @@ plot(reg$residuals)
 # the model fits badly
 
 
+## expl 3.2 The sample path of an AR(1) process
+par(mfrow = c(2, 1))
+
+# simulate from ARIMA
+arima.sim()
+  # order: A specification of the non-seasonal part of the ARIMA model: 
+  # the three integer components (p, d, q) 
+  # are the AR order, 
+  # the degree of differencing, 
+  # and the MA order.
+
+ar_mod.sim <- arima.sim(list(order = c(1, 0, 0), ar = 0.9),
+          n = 100)
+plot(ar_mod.sim, ylab = "xt",
+     main = (expression(AR(1)~~~phi == +.9)))
+
+
+ar_mod2.sim <- arima.sim(list(order = c(1, 0, 0), ar = -.9),
+          n = 100)
+
+plot(ar_mod2.sim, ylab = "xt",
+     main = (expression(AR(1)~~~phi == -.9)))
 
 
 
